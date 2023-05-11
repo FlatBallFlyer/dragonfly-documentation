@@ -1,0 +1,92 @@
+services:
+  - name: data
+    repos:
+      - name: Data
+        template: MongoDB
+  - name: project
+    repos: 
+      - name: project-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - project
+      - name: project-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - project
+          - admin
+  - name: experience
+    repos: 
+      - name: experience-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - experience
+      - name: experience-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - experience
+          - project-admin
+  - name: models
+    repos: 
+      - name: models-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - models
+      - name: models-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - models
+          - models-admin
+  - name: infrastructure
+    repos: 
+      - name: infrastructure-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - infrastructure
+      - name: infrastructure-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - infrastructure
+          - infrastructure-admin
+  - name: layouts
+    repos: 
+      - name: layouts-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - layouts
+      - name: prolayoutsject-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - layouts
+          - layouts-admin
+  - name: search
+    repos: 
+      - name: search-api
+        template: goLangMongoDbGraphQl
+        models: 
+          - search
+      - name: project-ui
+        template: vueGraphQlCRUD
+        layouts: 
+          - search
+          - search-admin
+environments:
+- name: dev
+- name: test
+- name: staging
+- name: production
+service-levels:
+  objectives:
+    capacity: in DAUs
+    operating: Schedule - 24/7, M-F 7-7, etc.
+    availability: in 9s
+    performance: response time matrix
+    recoveryPoint: in hours
+    recoveryTime: in hours
+  indicators:
+    availability: synthetic login/logout every 120 seconds
+    performance: http log analysis
+  agreements:
+    availability: NONE
+    performance: NONE
+    recovery: NONE
+

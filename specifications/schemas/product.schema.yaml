@@ -1,0 +1,228 @@
+# /*
+#  * 
+#  * Copyright 2022-2023 Surround Sight LLC
+#  * Licensed under the Apache License, Version 2.0 (the "License");
+#  * you may not use this file except in compliance with the License.
+#  * You may obtain a copy of the License at
+#  * 
+#  * http://www.apache.org/licenses/LICENSE-2.0
+#  * 
+#  * Unless required by applicable law or agreed to in writing, software
+#  * distributed under the License is distributed on an "AS IS" BASIS,
+#  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  * See the License for the specific language governing permissions and
+#  * limitations under the License.
+#  *
+#  */
+$schema: "http://json-schema.org/draft-07/schema"
+$id: "https://gitlab.com/dragonfly/project.schema.yaml"
+title: Product object
+version: 1.0.1
+description: A products high level description and product roadmap
+contact:
+  email: devs@surroundsightconsulting.com
+type: object
+required:
+  - Name
+properties:
+  _id:
+  Name:
+    description: 
+    type: string
+    maxlength: 30
+  Team:
+    description: The team that supports a product
+    type: array
+    items:
+      type: object
+      properties:
+        person: 
+          type: object
+          $ref: "./person.schema.yaml"
+        roles:
+          type: array
+          items:
+            type: string
+            enum:
+              - lead
+              - data
+              - ux
+              - sre
+              - sponsor
+  BigIdea:
+    description: The Big Idea that drives the product. The format "Create WHAT that allows USERS to RECOGNIZE BENEFIT enabling PRODUCT to PRODUCE VALUE" can be helpful
+    type: string
+    pattern: Paragraph
+  BusinessCase:
+    description: A high level financial case that demonstrates a profitable product scenario.
+    type: string
+    pattern: Paragraph
+  Personas:
+    description: List of stakeholders that are hands-on-keyboard users of the product
+    type: array
+    items:
+      description: A stakeholder - also a proxy for a security role
+      type: object
+      required:
+      properties:
+        Name:
+          description: A stakeholder name
+          type: string
+          pattern: SENTENCE
+        Description:
+          description: A story line for the persona
+          type: string
+          pattern: PARAGRAPH
+  Roadmap:
+    description: 
+    type: object
+    required:
+      - now
+      - next
+      - later
+    properties:
+      now:
+        description: Experience Hills currently under development
+        type: array
+        items:
+          type: object
+          $ref: "./hill.schema.yaml"
+      next:
+        description: Experience Hills planed for near-term release
+        type: array
+        items:
+          type: object
+          $ref: "./hill.schema.yaml"
+      later:
+        description: Experience Hills for strategic initiatives
+        type: array
+        items:
+          type: object
+          $ref: "./hill.schema.yaml"
+      finalized:
+        description: 
+        type: object
+        $ref: "./crumb.schema.yaml"
+  Infrastructure:
+    description: 
+    type: object
+    properties:
+      environments:
+        type: array
+        items:
+          type: object
+          $ref: "./environment.schema.yaml"
+      finalized:
+        description: 
+        type: object
+        $ref: "./crumb.schema.yaml"
+  Models:
+    description: 
+    type: object
+    properties:
+      objects:
+        type: array
+        items:
+          type: object
+          $ref: "./models.schema.yaml"  
+      finalized:
+        description: 
+        type: object
+        $ref: "./crumb.schema.yaml"  
+  Services:
+    description: The microservices that divide the problem into bounded contexts and define the source code repositories to be created
+    type: object
+    properties:
+      status:
+        description: Status of this artifact
+        type: string
+        enum:
+          - draft
+          - working
+          - finalized
+      domains:
+        description: Bounded Domains for Microservices
+        type: array
+        items:
+          description: Microservice Triplet
+          type: object
+          properties:
+            name: 
+              description: Microservice Triplet Name
+              type: string
+              pattern: RE for Word
+            data:
+              description: The data layer in this microservice
+              type: object
+              properties:
+                template:
+                  description: The template project to use when creating this service
+                  type: string
+                  pattern: RE for Word
+                source:
+                  description: The list of data sources that this domain owns.
+                  type: array
+                  items:
+                    type: string
+                    pattern: RE for Word
+                sync:
+                  description: The list of data sources that this domain will read
+                  type: array
+                  items:
+                    type: string
+                    pattern: RE for Word
+            api:
+              description: The API layer in this microservice
+              type: object
+              properties:
+                template:
+                  description: The template project to use when creating this service
+                  type: string
+                  pattern: RE for Word
+                swagger:
+                  description: Ref to The SWAGGER for the API to implement
+                  type: object
+            ui:
+              description: The UI layer in this microservice
+              type: object
+              properties:
+                template: 
+                  description: The template project to use when creating this service
+                  type: string
+                  pattern: RE for Word
+                routes:
+                  type: array
+                  items:
+                    description: The Routes and Views to be implemented
+                    type: object
+                    properties:
+                      name:
+                        description: The route string
+                        type: string
+                        pattern: RE for Word
+                      layout:
+                        description: Root of a Heirarcial, Polymorphic list of UI Control Objects and the Model Components they are attached to 
+                        type: object
+                        $ref: "./control.schema.yaml"
+        items:
+          description: Microservice Triplet
+          type: object
+          properties:
+            name: 
+              data:
+                source:
+                sync:
+              api:
+                swagger:
+              ui:
+                routes:
+                  name:
+                  layout:
+      created:
+        description: 
+        type: object
+        $ref: "./crumb.schema.yaml"
+      updated:
+        description: 
+        type: object
+        $ref: "./crumb.schema.yaml"

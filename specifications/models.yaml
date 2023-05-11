@@ -1,0 +1,62 @@
+DragonFly-Models:
+  - Name: Profile
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+  - Name: Project
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+  - Name: Models
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+  - Name: Infrastructure
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+  - Name: Experience
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+  - Name: Layouts
+    Type: Hash
+    Description: 
+    Attrs: for Hash
+      - name: name
+        type: word
+        description: 
+      - name:  
+        type: word
+        description: 
+
