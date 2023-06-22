@@ -1,6 +1,6 @@
 # /*
 #  * 
-#  * Copyright 2022-2023 Surround Sight LLC
+#  * Copyright 2022-2023 Agile Learning Institute
 #  * Licensed under the Apache License, Version 2.0 (the "License");
 #  * you may not use this file except in compliance with the License.
 #  * You may obtain a copy of the License at
@@ -50,13 +50,37 @@ properties:
               - sre
               - sponsor
   BigIdea:
-    description: The Big Idea that drives the product. The format "Create WHAT that allows USERS to RECOGNIZE BENEFIT enabling PRODUCT to PRODUCE VALUE" can be helpful
+    description: The Big Idea that drives the product. 
+      A good Big Idea casts a strategic vision of a future that is enabled by a product. 
+      Keep the following points in mind when writing a Big Idea
+      - It is an "incomplete" problem (one that can not be definitively solved)
+      - It is more aspirational than a Problem Statement
+      - It should define a domain for continuous innovation 
+      - It should typically follow this formula
+      Create [Technology] that provides [Value] to [Audience] and enables [Client] to recognize [Benefit]
+
+      An example of a good Big Idea might be
+      - Create a Software as a Service Platform 
+        that provides run-the-business capabilities 
+        to Widget Manufacturers 
+        and enables Maxs Widget Company to monetize 
+        their unique management and construction processes.
+
     type: string
-    pattern: Paragraph
+    $ref: './types/paragraph.schema.yaml'
   BusinessCase:
-    description: A high level financial case that demonstrates a profitable product scenario.
+    description: A defensible explanation of the reasoning and calculations 
+      behind a specific potential financial benefit of taking some action, 
+      or the potential financial costs of inaction. 
+
+      Costs are best explained if framed in terms of the consequences of a Problem Statemen
+      WHO has PROBLEM RECEIVING BENEFIT because of BLOCKERS resulting in CONSEQUENCES
+
+      One possible formula to help with creating a high level business case would be
+      Move KPI by IMPACT for each INSTANCE of VOLUME yielding BENEFIT
+      (where Benefit relates back to the Big Idea)
     type: string
-    pattern: Paragraph
+    $ref: './types/paragraph.schema.yaml'
   Personas:
     description: List of stakeholders that are hands-on-keyboard users of the product
     type: array
@@ -66,15 +90,21 @@ properties:
       required:
       properties:
         Name:
-          description: A stakeholder name
+          description: A stakeholder (role) name
           type: string
-          pattern: SENTENCE
+          $ref: './types/word.schema.yaml'
         Description:
           description: A story line for the persona
           type: string
-          pattern: PARAGRAPH
+          $ref: './types/paragraph.schema.yaml'
   Roadmap:
-    description: 
+    description: A plan for developing systems to support a collection of Experience Hills
+      that identifies 
+      - Hills we Know we will build Now
+      - Hills we Think we will work on Next
+      - Hills we May work on Later. 
+      Once the "Now" scope has been built, the roadmap is revisited and reprioritized
+      with a new Now scope typically being selected as the most important item in the Next scope
     type: object
     required:
       - now

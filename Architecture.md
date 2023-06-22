@@ -18,10 +18,6 @@
 
 ## Architecture Principles
 
-### Executive Overview
-
-Many industries have been disrupted by new “Born in the Cloud” players that have demonstrated dazzling agility and scalability while continuously innovating at a pace that leaves traditional IT shops severely lagging in quick moving markets. MicroService architectures, and the key design patterns that are empowered by this approach have become key to the success of large scale cloud native systems.
-
 ### What is a Microservice?
 
 While there is no single definition for microservices, a consensus view has evolved over time in the industry. Micro Services are small in size, messaging-enabled, bounded by contexts, autonomously developed, independently deployable, decentralized and built and released with automated processes.
@@ -45,7 +41,7 @@ The book “The 12 Factor App” by Adam Wiggins has often been sighted as a sem
 
 1. Codebase - A single codebase, deployed multiple times, re-use at the executable level 
     - Orchestrated Containers
-1. Dependencies - Declarative, not implied 
+1. Dependencies - Declarative, not implied
     - pip, npm, nuget, maven - shared code is a dependency
 1. Configuration - Describe “The environment” in “the Environment”
     - Configuration and Secret Management in K8S
@@ -115,15 +111,15 @@ One of the defining characteristics of a MicroService is that it is “autonomou
     - Some validation will only be done by API layer. Validation constraints at the Data layer should be relaxed relative to the constraints enforced by the API.
 - The Operations (SRE Guild)
   - CI/CD with K8S, Helm?, Argo?
-  - ? Private Docker Container registry
-  - Public? Dependency Registries (Pypl, npm, nuget, maven)
+  - ? Private ? Docker Container registry
+  - ? Private ? Dependency Registries (Pypl, npm, nuget, maven)
   - Dependency Governance?
   - Open Source Service Implementations
     - KeyCloak Identity Service
   
 ### Development Contracts
 
-Since we have separated our architecture into 3 layers we need to define design contracts that developers can use to succinctly describe the interactions between the layers. The contract between the UI and API is expressed as an Open API Specification (OAS) sometimes known as Swagger. The contract between the Controller and the Model is a set of JSON Schema that define the data structures for both the API and any ORM or Data Access libraries. The OAS and Data Schemas are developed during design, and are design locked assets subject to change control. Any changes to design assets should be reviewed and approved by the team members that would be impacted **before** any code is written based on those changes.
+Since we have separated our architecture into 3 layers we need to define design contracts that developers can use to succinctly describe the interactions between the layers. The contract between the UI and API is expressed as an Open API Specification (OAS) sometimes known as Swagger. The contract between the Controller and the Model is a set of JSON Schema that define the data structures for both the API and any ORM or Data Access libraries.
 
 A word about API design and the separation of User Interaction and Business Logic. In general the UI should only implement the logic necessary to create a desirable user experience. Business logic should be present in the API or controller layer of the architecture. API design should keep in mind that the user of an API is the UI engineer, and the API should be designed to make the UI engineers job as easy as possible. API’s should be designed to support as few calls as possible to support the user experience. API’s should also have the intelligence to interpret the data being provided, relieving the UI developer of almost all data driven logic. API’s should always define meaningful devault values and behaviors.
 
