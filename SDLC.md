@@ -16,6 +16,7 @@ During this phase we collect the design artifacts that will define the details o
 - MicroService Boundries
 - Open API Specifications
 - Infrastructure and CI/CD
+- UI Routes and Layout
 
 ## Build Phase
 
