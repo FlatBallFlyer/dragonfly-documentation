@@ -29,7 +29,7 @@ properties:
   Name:
     description: 
     type: string
-    maxlength: 30
+    $ref: './types/word.schema.yaml'
   Team:
     description: The team that supports a product
     type: array
@@ -256,3 +256,7 @@ properties:
         description: 
         type: object
         $ref: "./crumb.schema.yaml"
+  Saved:
+    description: Last Saved by/at/from
+    type: object
+    $ref: './crumb.schema.yaml'
